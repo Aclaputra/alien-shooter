@@ -17,7 +17,7 @@ public class App extends JFrame
         setResizable(false);
         pack();
 
-        setTitle("Star Animation");
+        setTitle("Star Utility Timer");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
