@@ -14,10 +14,12 @@ public class App extends JFrame
 
     private void initUI() {
         add(new Board());
-        setSize(350, 325);
-        setTitle("Application");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        pack();
+
+        setTitle("Star Animation");
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public static void main( String[] args )

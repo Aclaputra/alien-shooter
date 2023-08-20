@@ -1,36 +1,63 @@
 package org.example;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 
-public class Board extends JPanel{
+public class Board extends JPanel implements ActionListener{
+    private final int B_WIDTH = 350;
+    private final int B_HEIGHT = 350;
+    private final int INITIAL_X = -40;
+    private final int INITIAL_Y = -40;
+    private final int DELAY = 25;
+
+    private Image star;
+    private Timer timer;
+    private int x, y;
+
+    public Board() {
+        initBoard();
+    }
+    private void loadImage() {
+        ImageIcon ii = new ImageIcon("src/main/resources/star.png");
+        star = ii.getImage();
+    }
+    private void initBoard() {
+        setBackground(Color.BLACK);
+        setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
+
+        loadImage();
+
+        x = INITIAL_X;
+        y = INITIAL_Y;
+
+        timer = new Timer(DELAY, this);
+        timer.start();
+    }
     @Override
     public void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        RenderingHints rh
-                = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON);
+        super.paintComponent(g);
+        drawStar(g);
+    }
 
-        rh.put(RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
+    private void drawStar(Graphics g) {
+        g.drawImage(star, x, y, this);
+        Toolkit.getDefaultToolkit().sync();
+    }
 
-        g2d.setRenderingHints(rh);
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        x += 1;
+        y += 1;
 
-        Dimension size = getSize();
-        double w = size.getWidth();
-        double h = size.getHeight();
-
-        Ellipse2D e = new Ellipse2D.Double(0,0,80,130);
-        g2d.setStroke(new BasicStroke(1));
-        g2d.setColor(Color.gray);
-
-        for (double deg = 0; deg < 360; deg += 5) {
-            AffineTransform at
-                    = AffineTransform.getTranslateInstance(w/2, h/2);
-            at.rotate(Math.toRadians(deg));
-            g2d.draw(at.createTransformedShape(e));
+        if (y > B_HEIGHT) {
+            y = INITIAL_Y;
+            x = INITIAL_X;
         }
+
+        repaint();
     }
 }
