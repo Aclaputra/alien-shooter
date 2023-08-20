@@ -14,10 +14,10 @@ public class App extends JFrame
 
     private void initUI() {
         add(new Board());
-        setResizable(true);
-        pack();
+        setResizable(false);
 
-        setTitle("Star Thread Animation");
+        setTitle("Moving Sprite");
+        setSize(400, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
