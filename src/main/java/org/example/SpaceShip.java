@@ -3,8 +3,9 @@ package org.example;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
-public class SpaceShip {
+public class SpaceShip extends Sprite {
     private int dx;
     private int dy;
     private int x = 40;
@@ -12,9 +13,20 @@ public class SpaceShip {
     private int w;
     private int h;
     private Image image;
+    private ArrayList<Missile> missiles;
 
-    public SpaceShip() {
+    public SpaceShip(int x, int y) {
+        super(x, y);
         loadImage();
+
+        initSpaceShip();
+    }
+
+    private void initSpaceShip() {
+        missiles = new ArrayList<>();
+
+        loadImage("src/main/resources/craft.png");
+        getImageDimensions();
     }
     private void loadImage() {
         ImageIcon ii = new ImageIcon("src/main/resources/craft.png");
@@ -26,6 +38,10 @@ public class SpaceShip {
     public void move() {
         x += dx;
         y += dy;
+    }
+
+    public ArrayList<Missile> getMissiles() {
+        return missiles;
     }
     public int getX() {
         return x;
@@ -45,33 +61,26 @@ public class SpaceShip {
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        if (key == KeyEvent.VK_LEFT) {
-            dx = -2;
-        }
-        if (key == KeyEvent.VK_RIGHT) {
-            dx = 2;
-        }
-        if (key == KeyEvent.VK_UP) {
-            dy = -2;
-        }
-        if (key == KeyEvent.VK_DOWN) {
-            dy = 2;
-        }
+
+        if (key == KeyEvent.VK_SPACE) fire();
+        if (key == KeyEvent.VK_LEFT) dx = -2;
+        if (key == KeyEvent.VK_RIGHT) dx = 2;
+        if (key == KeyEvent.VK_UP) dy = -2;
+        if (key == KeyEvent.VK_DOWN) dy = 2;
+
     }
+
+    public void fire() {
+        missiles.add(new Missile(x + width, y + height / 2));
+    }
+
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        if (key == KeyEvent.VK_LEFT) {
-            dx = 0;
-        }
-        if (key == KeyEvent.VK_RIGHT) {
-            dx = 0;
-        }
-        if (key == KeyEvent.VK_UP) {
-            dy = 0;
-        }
-        if (key == KeyEvent.VK_DOWN) {
-            dy = 0;
-        }
+
+        if (key == KeyEvent.VK_LEFT) dx = 0;
+        if (key == KeyEvent.VK_RIGHT) dx = 0;
+        if (key == KeyEvent.VK_UP) dy = 0;
+        if (key == KeyEvent.VK_DOWN) dy = 0;
 
     }
 
