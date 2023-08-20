@@ -14,10 +14,10 @@ public class App extends JFrame
 
     private void initUI() {
         add(new Board());
-        setResizable(false);
+        setResizable(true);
         pack();
 
-        setTitle("Star Utility Timer");
+        setTitle("Star Thread Animation");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
