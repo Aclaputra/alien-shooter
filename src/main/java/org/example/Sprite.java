@@ -1,8 +1,13 @@
 package org.example;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.swing.*;
 import java.awt.*;
 
+@Getter
+@Setter
 public class Sprite {
     protected int x;
     protected int y;
@@ -25,19 +30,8 @@ public class Sprite {
         width = image.getWidth(null);
         height = image.getHeight(null);
     }
-    public Image getImage() {
-        return image;
-    }
-    public int getX() {
-        return x;
-    }
-    public int getY() {
-        return y;
-    }
-    public boolean isVisible() {
-        return visible;
-    }
-    public void setVisible(Boolean visible) {
-        this.visible = visible;
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
     }
 }

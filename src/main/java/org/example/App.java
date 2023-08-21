@@ -2,10 +2,7 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.EventQueue;
-/**
- * Hello world!
- *
- */
+
 public class App extends JFrame
 {
     public App() {
@@ -15,9 +12,9 @@ public class App extends JFrame
     private void initUI() {
         add(new Board());
         setResizable(false);
+        pack();
 
-        setTitle("Moving Sprite");
-        setSize(400, 300);
+        setTitle("Collisions");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
